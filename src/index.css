@@ -11,3 +11,16 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.app {
+  width: 100%
+}
+
+.imageDiv {
+  display: inline-block;
+  margin-top: 5%;
+}
+
+#left {
+  margin-right: 10%;
+}
