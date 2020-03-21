@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/sherwinvarkiani/TextCompare/static/css/main.654a953d.chunk.css",
+    "main.js": "/sherwinvarkiani/TextCompare/static/js/main.41ac3503.chunk.js",
+    "main.js.map": "/sherwinvarkiani/TextCompare/static/js/main.41ac3503.chunk.js.map",
+    "runtime-main.js": "/sherwinvarkiani/TextCompare/static/js/runtime-main.97b3048c.js",
+    "runtime-main.js.map": "/sherwinvarkiani/TextCompare/static/js/runtime-main.97b3048c.js.map",
+    "static/css/2.de424728.chunk.css": "/sherwinvarkiani/TextCompare/static/css/2.de424728.chunk.css",
+    "static/js/2.26d6977c.chunk.js": "/sherwinvarkiani/TextCompare/static/js/2.26d6977c.chunk.js",
+    "static/js/2.26d6977c.chunk.js.map": "/sherwinvarkiani/TextCompare/static/js/2.26d6977c.chunk.js.map",
+    "index.html": "/sherwinvarkiani/TextCompare/index.html",
+    "precache-manifest.16bca3f4dabc6dce196e40fa97b3ee7f.js": "/sherwinvarkiani/TextCompare/precache-manifest.16bca3f4dabc6dce196e40fa97b3ee7f.js",
+    "service-worker.js": "/sherwinvarkiani/TextCompare/service-worker.js",
+    "static/css/2.de424728.chunk.css.map": "/sherwinvarkiani/TextCompare/static/css/2.de424728.chunk.css.map",
+    "static/css/main.654a953d.chunk.css.map": "/sherwinvarkiani/TextCompare/static/css/main.654a953d.chunk.css.map",
+    "static/js/2.26d6977c.chunk.js.LICENSE.txt": "/sherwinvarkiani/TextCompare/static/js/2.26d6977c.chunk.js.LICENSE.txt",
+    "static/media/comparison.jpg": "/sherwinvarkiani/TextCompare/static/media/comparison.ce9f2791.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.97b3048c.js",
+    "static/css/2.de424728.chunk.css",
+    "static/js/2.26d6977c.chunk.js",
+    "static/css/main.654a953d.chunk.css",
+    "static/js/main.41ac3503.chunk.js"
+  ]
+}
