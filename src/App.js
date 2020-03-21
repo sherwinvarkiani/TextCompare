@@ -5,30 +5,57 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 /* Render the user uploaded images */
 function Image1Render(props) {
   if (props.selectedImg1 != null) {
-    return <img src={URL.createObjectURL(props.selectedImg1)} class="img-fluid img-max-size m-5 border border-dark"/>
+    return <img src={URL.createObjectURL(props.selectedImg1)} alt="Pic 1" class="img-fluid img-max-size m-5 border border-dark"/>
   }
-    return <img src={require("./placeholder-image.png")} class="img-fluid img-max-size m-5 border border-dark"/>
+    return <img src={require("./placeholder-image.png")} alt="placeholder" class="img-fluid img-max-size m-5 border border-dark"/>
 }
 
 function Image2Render(props) {
   if (props.selectedImg2 != null) {
-    return <img src={URL.createObjectURL(props.selectedImg2)} class="img-fluid img-max-size m-5 border border-dark"/>
+    return <img src={URL.createObjectURL(props.selectedImg2)} alt="Pic 2" class="img-fluid img-max-size m-5 border border-dark"/>
   }
-  return <img src={require("./placeholder-image.png")} class="img-fluid img-max-size m-5 border border-dark"/>
+  return <img src={require("./placeholder-image.png")} alt="placeholder" class="img-fluid img-max-size m-5 border border-dark"/>
+}
+
+function ComparisonImageRender(props) {
+  if (props.comparedImg != null) {
+    return <img src={props.comparedImg} alt="Pic 2" class="img-fluid img-max-size m-1 border border-dark"/>
+  }
+  return <h1>Upload your Images to Start Comparing</h1>
 }
 
 class App extends Component {
-  state = {
-    selectedImg1: null,
-    selectedImg2: null,
-    uploadedImg1: false,
-    uploadedImg2: false,
-    comparedImages: false
+  // state = {
+  //   selectedImg1: null,
+  //   selectedImg2: null,
+  //   uploadedImg1: false,
+  //   uploadedImg2: false,
+  //   comparedImages: false
+  // }
+  constructor(props) {
+    super(props)
+    this.state = {
+      selectedImg1: null,
+      selectedImg2: null,
+      uploadedImg1: false,
+      uploadedImg2: false,
+      comparedImages: false,
+      comparedImg: null
+    }
   }
 
   fileSelectedHandlerImg1 = event => {
+    // console.log("HELLO2 " + this.state.comparedImages)
+    // if (this.state.comparedImages !== false) {
+    //   console.log("ye")
+    //   window.location.reload();
+    // }
+    
+
     this.setState ({
-      selectedImg1: event.target.files[0]
+      selectedImg1: event.target.files[0],
+      comparedImages: false,
+      comparedImg: null
     })
   }
 
@@ -44,19 +71,31 @@ class App extends Component {
       if (response.ok) {
         console.log("uploadedImg1")
         this.setState({
-          uploadedImg1: true
+          uploadedImg1: true,
+          comparedImages: false,
+          comparedImg: null
         })
       } else {
         this.setState({
-          uploadedImg1: false
+          uploadedImg1: false,
+          comparedImages: false,
+          comparedImg: null
         })
       }
     });
   }
 
   fileSelectedHandlerImg2 = event => {
+    // console.log("HELLO " + this.state.comparedImages)
+    // if (this.state.comparedImages !== false) {
+    //   console.log("yes")
+    //   window.location.reload();
+    // }
+
     this.setState ({
-      selectedImg2: event.target.files[0]
+      selectedImg2: event.target.files[0],
+      comparedImages: false,
+      comparedImg: null
     })
   }
 
@@ -73,47 +112,66 @@ class App extends Component {
       if (response.ok) {
         console.log("uploadedImg2")
         this.setState({
-          uploadedImg2: true
+          uploadedImg2: true,
+          comparedImages: false,
+          comparedImg: null
         })
       } else {
         this.setState({
-          uploadedImg2: false
+          uploadedImg2: false,
+          comparedImages: false,
+          comparedImg: null
         })
       }
     });
   }
 
   compareImagesHandler = () => {
+    this.setState({
+      comparedImg: null,
+      comparedImages: false
+    })
     fetch('http://localhost:5000/compare', {
       method: 'POST'
     }).then((response) => {
-      console.log(response.status)
+      console.log(response.text())
       if (response.ok) {
         this.setState({
-          comparedImages: true
+          comparedImages: true,
+          comparedImg: require('./comparison/comparison.jpg')
         })
       }
       else {
         this.setState({
-          comparedImages: false
+          comparedImages: false,
+          comparedImg: null
         })
       }
       console.log(this.state.comparedImages)
     });
   }
 
+  swapImagesHandler = () => {
+    var temp = this.state.selectedImg1;
+    this.setState({
+      selectedImg1: this.state.selectedImg2,
+      selectedImg2: temp
+    })
+  }
+
   render() {
     return (
+      
       <div className="App" class="bg-light container-fluid">
         <div class="row">
           <div class="col bg-dark mb-3 header">
-            <h1 class="vcenter" id="title">Text Compare</h1>
-            <h2 class="vcenter" id="subtitle">By Sherwin Varkiani</h2>
+            <div><h1 id="title">Text Compare</h1></div>
+            <div><h2 id="subtitle">By Sherwin Varkiani</h2></div>
           </div>
         </div>
         <div class="row">
           <div class="col text-center">
-            {this.state.comparedImages ? (<img src={require("./comparison/comparison.jpg")} class="img-fluid img-max-size m-5 border border-dark"/>) : null}
+            <ComparisonImageRender comparedImg = {this.state.comparedImg}/>
           </div>
         </div>
         <div class="row">
@@ -124,6 +182,11 @@ class App extends Component {
               <button class="btn btn-dark" onClick={this.fileUploadHandlerImg1}>Upload the original image</button>
               <Image1Render selectedImg1 = {this.state.selectedImg1}/>
             </div>
+          </div>
+          <div class="row">
+            <div class="col my-auto"><button class="btn btn-dark swap" onClick={this.swapImagesHandler}>
+            <i class="icon-exchange"></i>
+            </button></div>
           </div>
           <div class="col text-center">
             <div class="input-block">

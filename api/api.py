@@ -7,6 +7,7 @@ from werkzeug.utils import secure_filename # used to secure filename
 import shutil
 import numpy as np 
 import cv2
+import time
 
 import boto3
 from botocore.exceptions import ClientError
@@ -160,6 +161,8 @@ def compareText(text1Attributes, text2Attributes, img1, img2):
         else:
 
             # Get the index and cast it to int
+            if (i-counter >= len(text2indices)):
+                counter = i - len(text2indices) + 1
             index = text2indices[i-counter]
             if index != ' ':
                 textIndex = int(index)
@@ -269,5 +272,6 @@ def compareImages():
     img2 = compareText(text1Attributes, text2Attributes, img1, img2)
 
     cv2.imwrite(os.path.join("../src/comparison", "comparison.jpg"), img2)
+    print("its done")
 
     return "Comparison completed successfully", 200
